@@ -4,7 +4,7 @@ const { petsModel, userModel } = require("./db");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const secret = "genius";
+
 const { default: mongoose } = require("mongoose");
 
 const app = express();
@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
   }
   const hashedpass = await bcrypt.compare(password, finduser.password);
   if (hashedpass) {
-    const token = jwt.sign({ id: finduser._id }, process.env.secret);
+    const token = jwt.sign({ id: finduser._id }, process.env.SECRET);
     res.json({
       message: "Login successful",
       token: token,
@@ -72,7 +72,7 @@ app.post("/login", async (req, res) => {
 
 const auth = (req, res, next) => {
   const token = req.headers.token;
-  const decodedtoken = jwt.verify(token, process.env.secret);
+  const decodedtoken = jwt.verify(token, process.env.SECRET);
   if (decodedtoken.id) {
     req.UserId = decodedtoken.id;
     next();
