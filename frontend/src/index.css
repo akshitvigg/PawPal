@@ -1,0 +1,11 @@
+:root {
+  background: url("https://media.istockphoto.com/id/510843182/photo/dark-muzzle-labrador-dog-and-cat-scottish.jpg?s=612x612&w=0&k=20&c=Lu95LOqNAd5Smg6QKiWDUuREQN3jViDR1qJe517Wldg=")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
