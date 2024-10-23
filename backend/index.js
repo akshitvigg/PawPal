@@ -10,10 +10,15 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://paw-pal-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 mongoose.connect(process.env.MONGO_URL);
-console.log(process.env.MONGO_URL);
 
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
