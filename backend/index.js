@@ -1,8 +1,8 @@
-require("dotenv").config();
 const express = require("express");
 const { petsModel, userModel } = require("./db");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const secret = "genius";
 const bcrypt = require("bcrypt");
 
 const { default: mongoose } = require("mongoose");
@@ -13,7 +13,9 @@ app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(
+  " mongodb+srv://akshitvig213:ghBbfvwFrwMK8UCM@cluster0.wvw0s.mongodb.net/Pet-Adoption"
+);
 
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
@@ -52,7 +54,7 @@ app.post("/login", async (req, res) => {
   }
   const hashedpass = await bcrypt.compare(password, finduser.password);
   if (hashedpass) {
-    const token = jwt.sign({ id: finduser._id }, process.env.SECRET);
+    const token = jwt.sign({ id: finduser._id }, secret);
     res.json({
       message: "Login successful",
       token: token,
@@ -66,7 +68,7 @@ app.post("/login", async (req, res) => {
 
 const auth = (req, res, next) => {
   const token = req.headers.token;
-  const decodedtoken = jwt.verify(token, process.env.SECRET);
+  const decodedtoken = jwt.verify(token, secret);
   if (decodedtoken.id) {
     req.UserId = decodedtoken.id;
     next();
