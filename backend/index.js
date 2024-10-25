@@ -1,25 +1,20 @@
 require("dotenv").config();
 const express = require("express");
 const { petsModel, userModel } = require("./db");
-
+const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const {  mongoose } = require("mongoose");
-var cors = require(cors());
-app.use(cors());
-app.options('*',cors());
-var allowCrossDomain = function(req,res,next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();  
-}
-app.use(allowCrossDomain);
 
 const app = express();
 const port  = process.env.PORT
 
+app.use(cors({
+  origin: ["*"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
 
 
 app.use(express.json());
