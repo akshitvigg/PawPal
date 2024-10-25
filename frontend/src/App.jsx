@@ -466,23 +466,46 @@ const Login = () => {
     return true; // If all checks pass, return true
   };
 
+  // const loginbtn = async () => {
+  //   if (!validateForm()) {
+  //     return; // Stop submission if validation fails
+  //   }
+
+  //   try {
+  //     const res = await axios.post("https://pawpal-backend.onrender.com/login", {
+  //       email,
+  //       password,
+  //     });
+  //     localStorage.setItem("token", res.data.token);
+  //     alert("login successful");
+  //     navigate("/form");
+  //   } catch (e) {
+  //     alert("error while login");
+  //   }
+  // };
   const loginbtn = async () => {
     if (!validateForm()) {
       return; // Stop submission if validation fails
     }
-
+  
     try {
-      const res = await axios.post("https://pawpal-backend.onrender.com/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://pawpal-backend.onrender.com/login",
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       localStorage.setItem("token", res.data.token);
       alert("login successful");
       navigate("/form");
     } catch (e) {
-      alert("error while login");
+      alert("Error during login. Please check your credentials or try again later.");
     }
   };
+  
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="signupdiv">
