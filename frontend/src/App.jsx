@@ -49,7 +49,7 @@ const InputComp = () => {
       // Send the data to your backend
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3000/addpets",
+        "https://pawpal-backend.onrender.com/addpets",
         {
           petname,
           pettype,
@@ -65,7 +65,7 @@ const InputComp = () => {
       );
 
       // Fetch updated data
-      const response = await axios.get("http://localhost:3000/getpets", {
+      const response = await axios.get("https://pawpal-backend.onrender.com/getpets", {
         headers: {
           token: token,
         },
@@ -206,7 +206,7 @@ const Table = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/getpets", {
+        const response = await axios.get("https://pawpal-backend.onrender.com/getpets", {
           headers: {
             token: token,
           },
@@ -367,7 +367,7 @@ const LandingPage = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/signup", {
+      await axios.post("https://pawpal-backend.onrender.com/signup", {
         username,
         email,
         password,
@@ -472,7 +472,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/login", {
+      const res = await axios.post("https://pawpal-backend.onrender.com/login", {
         email,
         password,
       });
