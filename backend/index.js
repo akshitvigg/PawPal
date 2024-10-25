@@ -5,17 +5,11 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const { default: mongoose } = require("mongoose");
+const {  mongoose } = require("mongoose");
 
 const app = express();
-
-app.use(
-  cors({
-    origin: ["https://paw-pal-frontend.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
+const port  = process.env.PORT
+app.use(cors());
 
 app.use(express.json());
 
@@ -117,6 +111,6 @@ app.get("/getpets", auth, async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server started on port 3000");
 });
