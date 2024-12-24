@@ -1,6 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import logo from "./fonts/logo.png";
 import xlogo from "./fonts/twitter-logo.png";
 import "./App.css";
@@ -37,7 +35,6 @@ const InputComp = () => {
   const [pettype, setpettype] = useState("");
   const [breed, setBreed] = useState("");
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [phn, setPhn] = useState("");
   const navigate = useNavigate();
 
@@ -45,10 +42,9 @@ const InputComp = () => {
     event.preventDefault();
 
     try {
-      // Send the data to your backend
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3000/addpets",
+        "https://pawpal-2.onrender.com/addpets",
         {
           petname,
           pettype,
@@ -63,12 +59,14 @@ const InputComp = () => {
         }
       );
 
-      // Fetch updated data
-      const response = await axios.get("http://localhost:3000/getpets", {
-        headers: {
-          token: token,
-        },
-      });
+      const response = await axios.get(
+        "https://pawpal-2.onrender.com/getpets",
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
       setPets(response.data);
 
       alert("Pet data saved successfully!");
@@ -199,18 +197,21 @@ const Table = () => {
   //   }
 
   //   fetchPets();
-  // }, []); // Empty dependency array means this runs once when component mounts
+  // }, []);
   useEffect(() => {
     async function fetchPets() {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/getpets", {
-          headers: {
-            token: token,
-          },
-        });
-        setPets(response.data); // Update the pets data in context
+        const response = await axios.get(
+          "https://pawpal-2.onrender.com/getpets",
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+        setPets(response.data);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch pets data");
@@ -220,7 +221,7 @@ const Table = () => {
     }
 
     fetchPets();
-  }, []); // Empty dependency array means this runs once when component mounts
+  }, []);
 
   if (loading) {
     return <div className="text-center p-4">Loading pets data...</div>;
@@ -338,35 +339,32 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const validateForm = () => {
-    // Check if the username is empty
     if (username.trim() === "") {
       alert("Username is required");
       return false;
     }
 
-    // Check if email format is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
       return false;
     }
 
-    // Check if the password meets length requirement
     if (password.length < 6) {
       alert("Password should be at least 6 characters long");
       return false;
     }
 
-    return true; // If all checks pass, return true
+    return true;
   };
 
   async function signupfn() {
     if (!validateForm()) {
-      return; // Stop submission if validation fails
+      return;
     }
 
     try {
-      await axios.post("http://localhost:3000/signup", {
+      await axios.post("https://pawpal-2.onrender.com/signup", {
         username,
         email,
         password,
@@ -449,20 +447,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const validateForm = () => {
-    // Check if email format is valid
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
       return false;
     }
 
-    // Check if the password meets length requirement
     if (password.length < 6) {
       alert("Password should be at least 6 characters long");
       return false;
     }
 
-    return true; // If all checks pass, return true
+    return true;
   };
 
   // const loginbtn = async () => {
@@ -484,12 +480,12 @@ const Login = () => {
   // };
   const loginbtn = async () => {
     if (!validateForm()) {
-      return; // Stop submission if validation fails
+      return;
     }
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/login",
+        "https://pawpal-2.onrender.com/login",
         { email, password },
         {
           headers: {

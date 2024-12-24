@@ -1,4 +1,3 @@
-/* Base Layout */
 .page-container {
   flex: 1;
   display: flex;
@@ -14,7 +13,6 @@ body {
   flex-direction: column;
 }
 
-/* Header Styles */
 .header {
   background-color: rgba(30, 30, 30, 0.6);
   backdrop-filter: blur(10px);
@@ -28,7 +26,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Navigation Elements */
 .navele {
   display: flex;
   gap: 1rem;
@@ -51,7 +48,6 @@ body {
   color: white;
 }
 
-/* Table Styles */
 table {
   width: 100%;
   max-width: 1200px;
@@ -93,7 +89,6 @@ tr:hover {
   text-align: center;
 }
 
-/* Footer Styles */
 .footer {
   background-color: rgba(30, 30, 30, 0.6);
   backdrop-filter: blur(10px);
@@ -106,7 +101,6 @@ tr:hover {
   box-sizing: border-box;
 }
 
-/* Form Styles */
 .formdiv {
   display: flex;
   justify-content: center;
@@ -143,7 +137,6 @@ tr:hover {
   margin-bottom: 25px;
 }
 
-/* Font Faces */
 @font-face {
   font-family: "myfont";
   src: url("./fonts/CatPaw-zr0OG.otf");
@@ -154,7 +147,6 @@ tr:hover {
   src: url("./fonts/HoneyBeezy-MVPew.ttf");
 }
 
-/* Button Styles */
 .button-85 {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -225,7 +217,6 @@ tr:hover {
   border-radius: 10px;
 }
 
-/* Go Back Button */
 .goback {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -282,7 +273,6 @@ tr:hover {
   border-radius: 10px;
 }
 
-/* Auth Input Styles */
 .authinput {
   font-family: sans-serif;
   background-color: #111;
@@ -297,7 +287,6 @@ tr:hover {
   font-size: clamp(14px, 2vw, 16px);
 }
 
-/* Signup Styles */
 .signupdiv {
   width: min(90%, 500px);
   margin: 2rem auto;
@@ -338,7 +327,6 @@ tr:hover {
   transform: scale(0.98);
 }
 
-/* Responsive Breakpoints */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
