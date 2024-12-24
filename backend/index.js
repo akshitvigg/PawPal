@@ -5,13 +5,12 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const {  mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 
 const app = express();
-const port  = process.env.PORT
+const port = process.env.PORT;
 
 app.use(cors());
-
 
 app.use(express.json());
 
@@ -114,5 +113,5 @@ app.get("/getpets", auth, async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("server started on port 3000");
+  console.log(`server started on port ${port}`);
 });

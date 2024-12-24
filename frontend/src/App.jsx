@@ -13,7 +13,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import axios from "axios";
-import { flushSync } from "react-dom";
 
 const PetsContext = createContext();
 
@@ -49,7 +48,7 @@ const InputComp = () => {
       // Send the data to your backend
       const token = localStorage.getItem("token");
       await axios.post(
-        "https://pawpal-backend.onrender.com/addpets",
+        "http://localhost:3000/addpets",
         {
           petname,
           pettype,
@@ -65,7 +64,7 @@ const InputComp = () => {
       );
 
       // Fetch updated data
-      const response = await axios.get("https://pawpal-backend.onrender.com/getpets", {
+      const response = await axios.get("http://localhost:3000/getpets", {
         headers: {
           token: token,
         },
@@ -206,7 +205,7 @@ const Table = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://pawpal-backend.onrender.com/getpets", {
+        const response = await axios.get("http://localhost:3000/getpets", {
           headers: {
             token: token,
           },
@@ -367,7 +366,7 @@ const LandingPage = () => {
     }
 
     try {
-      await axios.post("https://pawpal-backend.onrender.com/signup", {
+      await axios.post("http://localhost:3000/signup", {
         username,
         email,
         password,
@@ -487,10 +486,10 @@ const Login = () => {
     if (!validateForm()) {
       return; // Stop submission if validation fails
     }
-  
+
     try {
       const res = await axios.post(
-        "https://pawpal-backend.onrender.com/login",
+        "http://localhost:3000/login",
         { email, password },
         {
           headers: {
@@ -502,10 +501,12 @@ const Login = () => {
       alert("login successful");
       navigate("/form");
     } catch (e) {
-      alert("Error during login. Please check your credentials or try again later.");
+      alert(
+        "Error during login. Please check your credentials or try again later."
+      );
     }
   };
-  
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="signupdiv">
